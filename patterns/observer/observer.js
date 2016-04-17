@@ -14,7 +14,7 @@ ObserverList.prototype.count = function (obj) {
 };
 
 ObserverList.prototype.get = function (index) {
-  if (index > -1 index < this.observerList.length) {
+  if (index > -1 && index < this.observerList.length) {
     return this.observerList[index];
   }
 };
@@ -49,7 +49,7 @@ Subject.prototype.removeObserver = function (observer) {
 
 Subject.prototype.notify = function (context) {
   let observerCount = this.observers.count();
-  for (let i = 0; i < observerCount, i++) {
+  for (let i = 0; i < observerCount; i++) {
     this.observers.get(i).update(context);
   }
 }
@@ -61,16 +61,11 @@ function Observer() {
   }
 }
 
-// let's pretend we have this HTML:
-//<button id='addNewObserver'>Add New Observer</button>
-//<input id='mainCheckBox' type='checkBox'/>
-//<div id='observersContainer'></div>
-
 // notify state change on checkbox click
 const controlCheckbox = $('#mainCheckBox');
 _.extend(controlCheckbox, new Subject());
 
-controlCheckbox.onClick(function () {
+controlCheckbox.onclick(function () {
   controlCheckbox.notify(controlCheckbox.checked);
 })
 
